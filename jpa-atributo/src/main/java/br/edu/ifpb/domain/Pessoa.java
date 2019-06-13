@@ -12,7 +12,7 @@ import javax.persistence.Id;
  * @since 07/06/2019, 08:09:41
  */
 @Entity
-public class Pessoa implements Serializable{
+public class Pessoa implements Serializable {
 
     @Id
     private int codigo;
@@ -23,12 +23,12 @@ public class Pessoa implements Serializable{
     public Pessoa() {
     }
 
-    public Pessoa(int codigo, String nome,Sexo sexo) {
+    public Pessoa(int codigo, String nome, Sexo sexo) {
         this.codigo = codigo;
         this.nome = nome;
         this.sexo = sexo;
     }
-    
+
 
     public int getCodigo() {
         return codigo;
@@ -53,6 +53,6 @@ public class Pessoa implements Serializable{
     public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
-    
-    
+
+
 }

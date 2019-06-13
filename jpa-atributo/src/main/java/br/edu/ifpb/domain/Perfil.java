@@ -1,9 +1,6 @@
 package br.edu.ifpb.domain;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -24,25 +21,21 @@ public class Perfil implements Serializable {
     @Basic(fetch = FetchType.LAZY)
     @Lob
     private String descricao; // C-LOB
-    @Basic(fetch = FetchType.LAZY)
+    @Basic(fetch = FetchType.EAGER)
     @Lob
     private byte[] foto; // B-LOB
+    @Transient
+    private ImageFromFile image;
 
     public Perfil() {
     }
 
-    public Perfil(int codigo,String descricao,String path) {
+    public Perfil(int codigo, String descricao, String path) {
         this.codigo = codigo;
         this.descricao = descricao;
-        try {
-            this.foto = new ImageFromFile(
-                path
-            ).toBytes();
-        } catch (IOException ex) {
-            this.foto = new byte[0];
-        }
+        this.image = new ImageFromFile(path);
+        this.foto = this.image.toBytes();
     }
-
     public int getCodigo() {
         return codigo;
     }

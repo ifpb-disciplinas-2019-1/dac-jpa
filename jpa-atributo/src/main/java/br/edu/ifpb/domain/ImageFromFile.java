@@ -16,7 +16,7 @@ public class ImageFromFile {
 
     public ImageFromFile(String path) {
         this(
-            Paths.get(path)
+                Paths.get(path)
         );
     }
 
@@ -24,7 +24,14 @@ public class ImageFromFile {
         this.path = path;
     }
 
-    public byte[] toBytes() throws IOException {
-        return Files.readAllBytes(path);
+    public byte[] toBytes() {
+        try {
+            return Files.readAllBytes(path);
+        } catch (IOException ex) {
+            return new byte[0];
+        }
     }
+
+    // TODO: método que transforma byte[] em File
+    // public File toFile() {}
 }

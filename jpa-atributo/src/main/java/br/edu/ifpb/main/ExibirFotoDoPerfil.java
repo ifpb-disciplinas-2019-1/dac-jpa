@@ -6,12 +6,12 @@
 package br.edu.ifpb.main;
 
 import br.edu.ifpb.domain.Perfil;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
 import javax.swing.ImageIcon;
 
 /**
- *
  * @author Ricardo Job
  */
 public class ExibirFotoDoPerfil extends javax.swing.JFrame {
@@ -20,8 +20,8 @@ public class ExibirFotoDoPerfil extends javax.swing.JFrame {
      * Creates new form ExebirFoto
      */
     EntityManager em = Persistence
-        .createEntityManagerFactory("ExemploPostgres")
-        .createEntityManager();
+            .createEntityManagerFactory("ExemploPostgres")
+            .createEntityManager();
 
     public ExibirFotoDoPerfil() {
         initComponents();
@@ -58,34 +58,34 @@ public class ExibirFotoDoPerfil extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jTextField1)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(85, 85, 85))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(jTextField1)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)
+                                .addGap(85, 85, 85))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                                .addContainerGap())
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 21, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton1))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 21, Short.MAX_VALUE))
+                                        .addComponent(jScrollPane1))
+                                .addContainerGap())
         );
 
         pack();
@@ -93,16 +93,16 @@ public class ExibirFotoDoPerfil extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int id = Integer.parseInt(
-            jTextField1.getText()
+                jTextField1.getText()
         );
-        Perfil find = em.find(Perfil.class,id);
+        Perfil find = em.find(Perfil.class, id);
         jLabel1.setIcon(
-            new ImageIcon(
-                find.getFoto()
-            )
+                new ImageIcon(
+                        find.getFoto()
+                )
         );
         jTextArea1.setText(
-            find.getDescricao()
+                find.getDescricao()
         );
 
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -124,13 +124,13 @@ public class ExibirFotoDoPerfil extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ExibirFotoDoPerfil.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
+            java.util.logging.Logger.getLogger(ExibirFotoDoPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ExibirFotoDoPerfil.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
+            java.util.logging.Logger.getLogger(ExibirFotoDoPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ExibirFotoDoPerfil.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
+            java.util.logging.Logger.getLogger(ExibirFotoDoPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ExibirFotoDoPerfil.class.getName()).log(java.util.logging.Level.SEVERE,null,ex);
+            java.util.logging.Logger.getLogger(ExibirFotoDoPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>

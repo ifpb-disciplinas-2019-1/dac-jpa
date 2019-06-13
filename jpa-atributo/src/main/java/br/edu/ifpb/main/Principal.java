@@ -1,16 +1,16 @@
 package br.edu.ifpb.main;
 
 import br.edu.ifpb.domain.Aluno;
-import br.edu.ifpb.domain.ImageFromFile;
+import br.edu.ifpb.domain.CPF;
 import br.edu.ifpb.domain.Perfil;
 import br.edu.ifpb.domain.Pessoa;
+import br.edu.ifpb.domain.Professor;
 import br.edu.ifpb.domain.Sexo;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.List;
 
 /**
  * @author Ricardo Job
@@ -24,32 +24,66 @@ public class Principal {
             .createEntityManagerFactory("ExemploPostgres")
             .createEntityManager();
 
-//        salvarAluno(em);
+//        salvarProfessor(em);
+//        listarPerfil(em);
+        salvarAluno(em);
 //        salvarPessoa(em);
+//        salvarPerfil(em);
+    }
+
+    private static void salvarProfessor(EntityManager em) {
+        Professor job = new Professor(
+            1,"Job"
+        );
+        job.novoEmail("ricardo.job@ifpb.edu.br");
+        job.novoEmail("ricardo.job@ifpb.edu.br");
+        job.novoEmail("ricardo.job@ifpb.edu.br");
+        job.novoEmail("ricardo.job@ifpb.edu.br");
+        job.novoEmail("ricardo.job@ifpb.edu.br");
+
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        em.persist(job);
+        transaction.commit();
+
+        Professor prof = em.find(Professor.class,1);
+        prof.getEmails()
+            .forEach(System.out::println);
+    }
+
+    private static void listarPerfil(EntityManager em) {
+        List<Perfil> list = em.createQuery("FROM Perfil p",Perfil.class)
+            .getResultList();
+        list.forEach(p -> System.out.println(p.getCodigo()));
+
+    }
+
+    private static void salvarPerfil(EntityManager em) {
         String descricao = "s entidades são convertidas para tabelas no banco..\n"
-            + "Os atributos simples desta entidade são convertidos às colunas da respectiva tabela."
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
-            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. "
+            + "Os atributos simples desta entidade são convertidos às colunas da respectiva tabela \n."
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
+            + " Nesta seção vamos estudar como configura e utilizar as anotações nos atributos simples. \n"
             + "-Todas as anotações estão presentes no pacote javax.persistence.*";
 
         Perfil perfil = new Perfil(
-            1,descricao,"src/main/resources/imagens/chaves.jpg"
+            1,
+            descricao,
+            "src/main/resources/imagens/chaves.jpg"
         );
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
         em.persist(perfil);
         transaction.commit();
-
     }
 
     private static void salvarPessoa(EntityManager em) {
@@ -60,8 +94,8 @@ public class Principal {
         transaction.begin();
         em.persist(pessoa);
         transaction.commit();
-        Pessoa find = em.find(Pessoa.class,2);
-        System.out.println(find.getSexo());
+//        Pessoa find = em.find(Pessoa.class,2);
+//        System.out.println(find.getSexo());
     }
 
     private static void salvarAluno(EntityManager em) {
@@ -75,11 +109,13 @@ public class Principal {
         em.persist(aluno);
         transaction.commit();
 
-        Aluno find = em.find(Aluno.class,6);
-
-        transaction.begin();
-        find.setCpf("123");
-        find.setNome("Mariana");
-        transaction.commit();
+//        Aluno find = em.find(Aluno.class,6);
+//
+//        transaction.begin();
+//        find.setNome("Mariana");
+//        find.setCpf(
+//            new CPF("123")
+//        );
+//        transaction.commit();
     }
 }

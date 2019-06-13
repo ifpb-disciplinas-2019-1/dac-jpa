@@ -7,7 +7,7 @@ package br.edu.ifpb.domain;
  */
 public enum Sexo {
     FEMININO, // 0
-//    INDEF,
+    //    INDEF,
     MASCULINO; // 1
-    
+
 }

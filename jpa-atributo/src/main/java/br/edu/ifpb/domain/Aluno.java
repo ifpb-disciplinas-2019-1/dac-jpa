@@ -1,10 +1,16 @@
 package br.edu.ifpb.domain;
 
+import br.edu.ifpb.infra.jpa.convert.ConvertLocalDate;
 import java.io.Serializable;
+import java.time.LocalDate;
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author Ricardo Job
@@ -20,11 +26,14 @@ public class Aluno implements Serializable {
     private String matricula;
     @Column(name = "nomeDoAluno",nullable = false,updatable = false)
     private String nome;
-    @Transient
-    private String cpf;
+    @Embedded
+    @AttributeOverride(name = "valor",column = @Column(name = "cpfpessoa"))
+    private CPF cpf;
 //    private transient String cpf; 
-    
-    
+
+//    @Temporal(TemporalType.DATE)
+    @Convert(converter = ConvertLocalDate.class)
+    private LocalDate dataDaMatricula;
     private double cre;
 
     public Aluno() {
@@ -34,8 +43,11 @@ public class Aluno implements Serializable {
         this.codigo = codigo;
         this.matricula = matricula;
         this.nome = nome;
-        this.cpf = "1212121212";
         this.cre = cre;
+        this.cpf = new CPF(
+            "1212121212"
+        );
+        this.dataDaMatricula = LocalDate.now();
     }
 
     public int getCodigo() {
@@ -70,11 +82,11 @@ public class Aluno implements Serializable {
         this.cre = cre;
     }
 
-    public String getCpf() {
+    public CPF getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(CPF cpf) {
         this.cpf = cpf;
     }
 

@@ -13,7 +13,7 @@ public class TransformarObjeto {
     public static void main(String[] args) {
         XStream xstream = new XStream(new DomDriver());
         String xml = xstream.toXML(
-            new Aluno(1,"123","Maria",7)
+                new Aluno(1, "123", "Maria", 7)
         );
         System.out.println(xml);
     }

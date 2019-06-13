@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="br.edu.ifpb.domain" v="4.4" rws="_155991877171340" Pws="_155991877171340" cws="_155991877171340" sm="false" xs="false" id="_15599187711991" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity compositePrimaryKeyClass="ProfessorPK" abs="false" class="Professor" v="true" xre="false" m="false" rootElement="_15599187711991" id="_15599187712325">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="double" v="true" name="salario" ft="false" id="_15599187712327"/>
+            <jpa:basic attribute-type="String" v="true" name="matricula" ft="false" id="_15599187712328"/>
+            <jpa:basic attribute-type="int" v="true" name="idade" ft="false" id="_15599187712329"/>
+            <jpa:basic attribute-type="br.edu.ifpb.domain.Sexo" v="true" name="sexo" ft="false" id="_155991877123210">
+                <jpa:enumerated>ORDINAL</jpa:enumerated>
+            </jpa:basic>
+            <jpa:element-collection target-class="java.lang.String" fetch="EAGER" collection-type="java.util.List" v="true" xvt="" name="telefones" ft="false" id="_155991877123311">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:collection-table name="Telefones"/>
+            </jpa:element-collection>
+            <jpa:id attribute-type="int" v="true" name="codigo" ft="false" id="_15599187712326">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyType="EMBEDDEDID" compositePrimaryKeyClass="TelefonePK" abs="false" class="Telefone" v="true" xre="false" m="false" rootElement="_15599187711991" id="_155991877124412">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" name="pais" ft="false" id="_155991877124413"/>
+            <jpa:id attribute-type="String" v="true" name="ddd" ft="false" id="_155991877124415"/>
+            <jpa:id attribute-type="String" v="true" name="numero" ft="false" id="_155991877124416"/>
+            <jpa:embedded-id v="true" name="chave" ft="false" id="_155991877124414"/>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="TecnicoPK" abs="false" class="Tecnico" v="true" xre="false" m="false" rootElement="_15599187711991" id="_155991877125217">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" name="nome" ft="false" id="_155991877125219">
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true" length="80"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" name="sigepe" ft="false" id="_155991877125220">
+                <jpa:column unique="false" nullable="true" insertable="true" updatable="true" length="25"/>
+            </jpa:basic>
+            <jpa:embedded connected-class-id="_155991877125422" v="true" name="cpf" ft="false" id="_155991877125321"/>
+            <jpa:id attribute-type="int" v="true" name="codigo" ft="false" id="_155991877125218">
+                <jpa:generated-value strategy="IDENTITY"/>
+            </jpa:id>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="AlunoPK" abs="false" class="Aluno" v="true" xre="false" m="false" rootElement="_15599187711991" id="_155991877126223">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" name="nome" ft="false" id="_155991877126325"/>
+            <jpa:basic attribute-type="double" v="true" name="cre" ft="false" id="_155991877126326"/>
+            <jpa:basic attribute-type="java.time.LocalDate" v="true" name="dataDeNascimento" ft="false" id="_155991877126532"/>
+            <jpa:embedded connected-class-id="_155991877126428" v="true" name="endereco" ft="false" id="_155991877126327"/>
+            <jpa:id attribute-type="int" v="true" name="id" ft="false" id="_155991877126324">
+                <jpa:generated-value strategy="SEQUENCE" generator="seq_name"/>
+            </jpa:id>
+            <jpa:version attribute-type="int" v="true" name="versao" ft="false" id="_155991877126533"/>
+        </jpa:attributes>
+        <jpa:sequence-generator name="seq_name" sequence-name="minha_seq" initial-value="1" allocation-size="1"/>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="PerfilPK" abs="false" class="Perfil" v="true" xre="false" m="false" rootElement="_15599187711991" id="_155991877127334">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" name="profile" ft="false" id="_155991877127336"/>
+            <jpa:basic fetch="LAZY" attribute-type="byte[]" v="true" name="foto" ft="false" id="_155991877127337">
+                <jpa:lob/>
+            </jpa:basic>
+            <jpa:basic fetch="LAZY" attribute-type="String" v="true" name="descricao" ft="false" id="_155991877127338">
+                <jpa:lob/>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.util.Date" v="true" name="criadoEm" ft="false" id="_155991877127339">
+                <jpa:temporal>TIME</jpa:temporal>
+            </jpa:basic>
+            <jpa:id attribute-type="int" v="true" name="codigo" ft="false" id="_155991877127335">
+                <jpa:generated-value strategy="TABLE" generator="table_name"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:table-generator name="table_name" table="sequence" pk-column-value="seq_minha_tabela" initial-value="5" allocation-size="3"/>
+    </jpa:entity>
+    <jpa:embeddable abs="false" class="CPF" v="true" xre="false" m="false" rootElement="_15599187711991" id="_155991877125422">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes/>
+    </jpa:embeddable>
+    <jpa:embeddable abs="false" class="Endereco" v="true" xre="false" m="false" rootElement="_15599187711991" id="_155991877126428">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" name="rua" ft="false" id="_155991877126529"/>
+            <jpa:basic attribute-type="String" v="true" name="bairro" ft="false" id="_155991877126530"/>
+            <jpa:basic attribute-type="String" v="true" name="cidade" ft="false" id="_155991877126531"/>
+        </jpa:attributes>
+    </jpa:embeddable>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_155991877171340">
+            <i ref="_155991877126223" x="191" y="17"/>
+            <i ref="_155991877127334" x="262" y="287"/>
+            <i ref="_155991877124412" x="416" y="213"/>
+            <i ref="_155991877125422" x="191" y="232"/>
+            <i ref="_155991877125217" x="33" y="186"/>
+            <i ref="_155991877126428" x="20" y="17"/>
+            <i ref="_15599187712325" x="416" y="17"/>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>
