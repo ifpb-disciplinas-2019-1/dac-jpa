@@ -2,11 +2,12 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="ExemploPostgres" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>br.edu.ifpb.domain.Aluno</class>
-    <class>br.edu.ifpb.domain.Pessoa</class>
-    <class>br.edu.ifpb.domain.Perfil</class>
-    <class>br.edu.ifpb.domain.Professor</class>
-    <class>br.edu.ifpb.infra.jpa.convert.ConvertLocalDate</class>
+    <class>br.edu.ifpb.domain.Endereco</class>
+    <class>br.edu.ifpb.domain.Funcionario</class>
+    <class>br.edu.ifpb.domain.Dependente</class>
+    <class>br.edu.ifpb.domain.Departamento</class>
+    <class>br.edu.ifpb.domain.Fornecedor</class>
+    <class>br.edu.ifpb.domain.Projeto</class>
     <properties>
       <!--      <property name="eclipselink.logging.level" value="FINE"/>-->
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dacjpa2019"/>

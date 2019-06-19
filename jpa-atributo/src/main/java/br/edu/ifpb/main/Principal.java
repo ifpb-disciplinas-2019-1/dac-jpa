@@ -1,7 +1,6 @@
 package br.edu.ifpb.main;
 
 import br.edu.ifpb.domain.Aluno;
-import br.edu.ifpb.domain.CPF;
 import br.edu.ifpb.domain.Perfil;
 import br.edu.ifpb.domain.Pessoa;
 import br.edu.ifpb.domain.Professor;
@@ -24,16 +23,16 @@ public class Principal {
             .createEntityManagerFactory("ExemploPostgres")
             .createEntityManager();
 
-//        salvarProfessor(em);
 //        listarPerfil(em);
-        salvarAluno(em);
-//        salvarPessoa(em);
+//        salvarAluno(em);
+//        salvarProfessor(em);
+        salvarPessoa(em);
 //        salvarPerfil(em);
     }
 
     private static void salvarProfessor(EntityManager em) {
         Professor job = new Professor(
-            1,"Job"
+            "Job"
         );
         job.novoEmail("ricardo.job@ifpb.edu.br");
         job.novoEmail("ricardo.job@ifpb.edu.br");
@@ -54,7 +53,7 @@ public class Principal {
     private static void listarPerfil(EntityManager em) {
         List<Perfil> list = em.createQuery("FROM Perfil p",Perfil.class)
             .getResultList();
-        list.forEach(p -> System.out.println(p.getCodigo()));
+        list.forEach(p -> System.out.println(p.getDescricao()));
 
     }
 
@@ -76,7 +75,7 @@ public class Principal {
             + "-Todas as anotações estão presentes no pacote javax.persistence.*";
 
         Perfil perfil = new Perfil(
-            1,
+            //            1,
             descricao,
             "src/main/resources/imagens/chaves.jpg"
         );
@@ -88,7 +87,7 @@ public class Principal {
 
     private static void salvarPessoa(EntityManager em) {
         Pessoa pessoa = new Pessoa(
-            2,"Kiko",Sexo.MASCULINO
+            "Kiko",Sexo.MASCULINO
         );
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
@@ -100,7 +99,7 @@ public class Principal {
 
     private static void salvarAluno(EntityManager em) {
         Aluno aluno = new Aluno(
-            6,"1231289","Florinda",9
+            "6764679967","Florinda",9
         );
 
         EntityTransaction transaction = em.getTransaction();
@@ -108,7 +107,7 @@ public class Principal {
         transaction.begin();
         em.persist(aluno);
         transaction.commit();
-
+        System.out.println(aluno.getCodigo());
 //        Aluno find = em.find(Aluno.class,6);
 //
 //        transaction.begin();

@@ -8,9 +8,9 @@ import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  * @author Ricardo Job
@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 public class Aluno implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int codigo;
     @Column(length = 15,unique = true)
     private String matricula;
@@ -40,7 +41,11 @@ public class Aluno implements Serializable {
     }
 
     public Aluno(int codigo,String matricula,String nome,double cre) {
+        this(matricula,nome,cre);
         this.codigo = codigo;
+    }
+
+    public Aluno(String matricula,String nome,double cre) {
         this.matricula = matricula;
         this.nome = nome;
         this.cre = cre;

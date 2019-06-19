@@ -4,8 +4,11 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Transient;
 
 /**
@@ -14,9 +17,19 @@ import javax.persistence.Transient;
  * @since 07/06/2019, 08:38:35
  */
 @Entity
+@SequenceGenerator(
+    name = "minha_seq",
+    sequenceName = "seq_name",
+    initialValue = 1,
+    allocationSize = 2
+)
 public class Perfil implements Serializable {
 
     @Id
+    @GeneratedValue(
+        strategy = GenerationType.SEQUENCE,
+        generator = "minha_seq"
+    )
     private int codigo;
     @Basic(fetch = FetchType.LAZY)
     @Lob
@@ -30,12 +43,17 @@ public class Perfil implements Serializable {
     public Perfil() {
     }
 
-    public Perfil(int codigo, String descricao, String path) {
+    public Perfil(int codigo,String descricao,String path) {
+        this(descricao,path);
         this.codigo = codigo;
+    }
+
+    public Perfil(String descricao,String path) {
         this.descricao = descricao;
         this.image = new ImageFromFile(path);
         this.foto = this.image.toBytes();
     }
+
     public int getCodigo() {
         return codigo;
     }

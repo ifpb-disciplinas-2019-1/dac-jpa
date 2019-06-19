@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="br.edu.ifpb.main.a" v="4.4" rws="_1517921960873158" Pws="_1517921960873158" cws="_1517921960873158" dbthm="DBColorScheme" persistenceUnitName="DEFAULT_PU" sm="false" xs="false" id="_1517921960545136" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity compositePrimaryKeyClass="ProjetoPK" abs="false" class="Projeto" v="true" jbn="false" xre="false" m="false" rootElement="_1517921960545136" id="_1517921960555137">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="descricao" ft="false" id="_1517921960556139">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:many-to-one primaryKey="false" connected-entity-id="_1534114805731" connected-attribute-id="_153411510112630" v="true" name="gerente" id="_153411510112229"/>
+            <jpa:many-to-many own="true" collection-type="java.util.List" connected-entity-id="_156094763347658" v="true" name="financiadors" id="_156094879499290"/>
+            <jpa:id attribute-type="int" v="true" xvt="" name="id" ft="false" id="_1517921960555138">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value/>
+            </jpa:id>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="DepartamentoPK" abs="false" class="Departamento" v="true" jbn="false" xre="false" m="false" rootElement="_1517921960545136" id="_1517921960563140">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="abreviacao" ft="false" id="_1517921960564142">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:one-to-one primaryKey="false" connected-entity-id="_1534114805731" connected-attribute-id="_153411503385925" v="true" xvt="" name="gerente" id="_153411503386026">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:one-to-one>
+            <jpa:id attribute-type="int" v="true" xvt="" name="id" ft="false" id="_1517921960563141">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value/>
+            </jpa:id>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="EnderecoPK" abs="false" class="Endereco" v="true" jbn="false" xre="false" m="false" rootElement="_1517921960545136" id="_1517921960580143">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="rua" ft="false" id="_1517921960580145">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="bairro" ft="false" id="_1517921960580146">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="cidade" ft="false" id="_1517921960580147">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" ft="false" id="_1517921960580144">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="FuncionarioPK" abs="false" class="Funcionario" v="true" jbn="false" xre="false" m="false" rootElement="_1517921960545136" id="_1517921960590148">
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="nome" ft="false" id="_1517921960590150">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="cpf" ft="false" id="_1517921960590151">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:many-to-one optional="true" primaryKey="false" connected-entity-id="_1517921960563140" v="true" xvt="" name="departamento" ft="false" id="_1517921960593154">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:many-to-one>
+            <jpa:one-to-many orp="false" own="true" collection-type="java.util.Set" connected-entity-id="_1517921960619155" v="true" xvt="" name="dependentes" ft="false" id="_1517921960590153">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:join-column name="id_funcionario" unique="false" nullable="true" insertable="true" updatable="true"/>
+            </jpa:one-to-many>
+            <jpa:one-to-one own="true" orp="false" optional="true" primaryKey="false" connected-entity-id="_1517921960580143" v="true" xvt="" name="endereco" ft="false" id="_1517921960590152">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:one-to-one>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" ft="false" id="_1517921960590149">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="DependentePK" abs="false" class="Dependente" v="true" jbn="false" xre="false" m="false" rootElement="_1517921960545136" id="_1517921960619155">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="nome" ft="false" id="_1517921960620157">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:id attribute-type="int" v="true" xvt="" name="codigo" ft="false" id="_1517921960620156">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value/>
+            </jpa:id>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="GerentePK" abs="false" class="Gerente" v="true" xre="false" m="false" rootElement="_1517921960545136" id="_1534114805731">
+        <jpa:ath>Ricardo Job</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="nome" id="_153411491315821">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" name="cpf" id="_153411491796522"/>
+            <jpa:basic attribute-type="java.util.Date" v="true" xvt="" name="inicio" id="_153411492707823">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
+            </jpa:basic>
+            <jpa:basic attribute-type="java.util.Date" v="true" xvt="" name="fim" id="_153411494115224">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:temporal>TIMESTAMP</jpa:temporal>
+            </jpa:basic>
+            <jpa:one-to-many collection-type="java.util.List" connected-entity-id="_1517921960555137" connected-attribute-id="_153411510112229" v="true" xvt="" name="projetos" id="_153411510112630">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:one-to-many>
+            <jpa:one-to-one own="true" primaryKey="false" connected-entity-id="_1517921960563140" connected-attribute-id="_153411503386026" v="true" name="departamento" id="_153411503385925"/>
+            <jpa:id attribute-type="Long" v="true" xvt="" name="id" id="_153411480574019">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Gerente.findAll">
+            <jpa:query>Select e from Gerente e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Gerente.findByNome">
+            <jpa:query>Select e from Gerente e where e.nome=:nome</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Gerente.findByCpf">
+            <jpa:query>Select e from Gerente e where e.cpf=:cpf</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Gerente.findByInicio">
+            <jpa:query>Select e from Gerente e where e.inicio=:inicio</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Gerente.findByFim">
+            <jpa:query>Select e from Gerente e where e.fim=:fim</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="FinanciadorPK" abs="false" class="Financiador" v="true" jbn="false" xre="false" m="false" rootElement="_1517921960545136" id="_156094763347658">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic attribute-type="String" v="true" xvt="" name="nome" ft="false" id="_156094763347760">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:basic attribute-type="String" v="true" name="area" id="_156094774495476"/>
+            <jpa:basic attribute-type="java.math.BigDecimal" v="true" xvt="" name="capital" id="_156094777686277">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+            </jpa:basic>
+            <jpa:id attribute-type="int" v="true" xvt="" name="codigo" ft="false" id="_156094763347659">
+                <jpa:xwm nil="false" req="false"/>
+                <jpa:xm nil="false" req="false"/>
+                <jpa:generated-value/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="false" name="Financiador.findByArea">
+            <jpa:query>Select f from Financiador f where f.area=:area</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="false" name="Financiador.findByCapital">
+            <jpa:query>Select f from Financiador f where f.capital=:capital</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:c>
+        <ct>java.util.List</ct>
+        <ct>java.util.Set</ct>
+        <ct>java.util.Map</ct>
+        <ct>java.util.Collection</ct>
+        <cit>java.util.ArrayList</cit>
+        <cit>java.util.LinkedList</cit>
+        <cit>java.util.HashSet</cit>
+        <cit>java.util.TreeSet</cit>
+        <cit>java.util.HashMap</cit>
+    </jpa:c>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_1517921960873158">
+            <i ref="_156094763347658" x="673" y="547"/>
+            <i ref="_1517921960590148" x="141" y="49"/>
+            <i ref="_1517921960619155" x="34" y="312"/>
+            <i ref="_1517921960555137" x="638" y="286"/>
+            <i ref="_1534114805731" x="584" y="39"/>
+            <i ref="_1517921960580143" x="414" y="29"/>
+            <i ref="_1517921960563140" x="327" y="402"/>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>

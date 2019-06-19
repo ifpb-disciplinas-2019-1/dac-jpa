@@ -9,7 +9,10 @@ import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.TableGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -19,10 +22,25 @@ import javax.persistence.TemporalType;
  * @since 12/06/2019, 10:37:18
  */
 @Entity
+@TableGenerator(
+    name = "<ID>",
+    table = "tabela_com_as_chaves",
+    pkColumnName = "coluna_chave",
+    pkColumnValue = "prof_seq",
+    valueColumnName = "coluna_valor"
+)
 public class Professor implements Serializable {
 
     @Id
+    @GeneratedValue(
+        strategy = GenerationType.TABLE,
+        generator = "<ID>"
+    )
     private int id;
+    
+    // DAC.2019.24424
+    private String codigo;
+    
     private String nome;
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataDeNascimento;
@@ -39,10 +57,19 @@ public class Professor implements Serializable {
         this(id,nome,new Date());
     }
 
-    public Professor(int id,String nome,Date dataDeNascimento) {
-        this.id = id;
+    public Professor(String nome) {
+        this(nome,new Date());
+    }
+
+    public Professor(String nome,Date dataDeNascimento) {
         this.nome = nome;
         this.dataDeNascimento = dataDeNascimento;
+    }
+
+    public Professor(int id,String nome,Date dataDeNascimento) {
+        this(nome,dataDeNascimento);
+        this.id = id;
+
     }
 
     public Professor() {
@@ -55,7 +82,6 @@ public class Professor implements Serializable {
     public List<String> getEmails() {
         return emails;
     }
-    
 
     public int getId() {
         return id;
