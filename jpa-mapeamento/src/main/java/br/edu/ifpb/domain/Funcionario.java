@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -41,6 +43,10 @@ public class Funcionario implements Serializable {
     // MUITOS Funcionarios trabalham em UM Departamento
     @ManyToOne
     private Departamento departamento; // N -> 1 unidirecional
+    
+    // MUITOS Funcionarios participam de MUITOS Projetos
+    @ManyToMany(mappedBy = "funcionarios") //inverso
+    private List<Projeto> projetos = new ArrayList<>(); // N -> N bidirecional
 
     public Funcionario() {
     }
@@ -53,6 +59,9 @@ public class Funcionario implements Serializable {
 
     public void novo(Dependente dependente) {
         this.dependentes.add(dependente);
+    }
+    public void novo(Projeto projeto) {
+        this.projetos.add(projeto);
     }
 
     public int getId() {

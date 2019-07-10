@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * @author Ricardo Job
@@ -17,6 +18,10 @@ public class Departamento implements Serializable {
     @GeneratedValue
     private int id;
     private String abreviacao;
+    // UM Departamente possui UM Gerente
+    // entidade possuídora
+    @OneToOne
+    private Gerente gerente; // 1 -> 1 bidirecional
 
     public Departamento() {
     }
@@ -39,6 +44,14 @@ public class Departamento implements Serializable {
 
     public void setAbreviacao(String abreviacao) {
         this.abreviacao = abreviacao;
+    }
+
+    public Gerente getGerente() {
+        return gerente;
+    }
+
+    public void setGerente(Gerente gerente) {
+        this.gerente = gerente;
     }
 
 }

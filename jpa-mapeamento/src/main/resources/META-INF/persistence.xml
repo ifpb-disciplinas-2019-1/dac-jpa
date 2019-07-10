@@ -8,6 +8,7 @@
     <class>br.edu.ifpb.domain.Departamento</class>
     <class>br.edu.ifpb.domain.Fornecedor</class>
     <class>br.edu.ifpb.domain.Projeto</class>
+    <class>br.edu.ifpb.domain.Gerente</class>
     <properties>
       <!--      <property name="eclipselink.logging.level" value="FINE"/>-->
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dacjpa2019"/>
