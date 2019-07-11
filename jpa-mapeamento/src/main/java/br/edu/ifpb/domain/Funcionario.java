@@ -14,6 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 
 /**
  * @author Ricardo Job
@@ -37,6 +38,7 @@ public class Funcionario implements Serializable {
 
     // UM Funcionario possui MUITOS Dependentes
     @OneToMany(cascade = {CascadeType.PERSIST})
+//    @OrderBy("nome ASC")
     @JoinColumn(name = "funcionario_id")
     private List<Dependente> dependentes = new ArrayList<>(); // 1 -> N unidirecional
 
