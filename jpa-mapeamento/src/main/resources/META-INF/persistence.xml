@@ -12,8 +12,19 @@
     <class>br.edu.ifpb.domain.hotel.Hotel</class>
     <class>br.edu.ifpb.domain.hotel.Hospede</class>
     <class>br.edu.ifpb.domain.hotel.Hospedagem</class>
+    <class>br.edu.ifpb.domain.single.Animal</class>
+    <class>br.edu.ifpb.domain.single.Cachorro</class>
+    <class>br.edu.ifpb.domain.single.Gato</class>
+    <class>br.edu.ifpb.domain.table.Carro</class>
+    <class>br.edu.ifpb.domain.table.Celta</class>
+    <class>br.edu.ifpb.domain.table.Fusca</class>
+    <class>br.edu.ifpb.domain.joined.Pessoa</class>
+    <class>br.edu.ifpb.domain.joined.Professor</class>
+    <class>br.edu.ifpb.domain.joined.Aluno</class>
+    <class>br.edu.ifpb.domain.mapped.Analista</class>
+    <class>br.edu.ifpb.domain.mapped.Tecnico</class>
     <properties>
-            <!--<property name="eclipselink.logging.level" value="FINE"/>-->
+      <property name="eclipselink.logging.level" value="FINE"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/dacjpa2019"/>
       <property name="javax.persistence.jdbc.user" value="dacjpa2019"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
