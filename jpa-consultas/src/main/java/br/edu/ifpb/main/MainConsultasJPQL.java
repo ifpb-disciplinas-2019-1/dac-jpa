@@ -370,8 +370,8 @@ public class MainConsultasJPQL {
         em.getTransaction().begin();
         int executeUpdate = em.createQuery(jpql).executeUpdate();
         em.getTransaction().commit();
-        System.out.println("executeUpdate = " + executeUpdate);
-         
+        System.out.println("Quantidade de entidades atualizadas: " + executeUpdate);
+
     }
 
     /* Remover o Dependente com código igual a 2 */
