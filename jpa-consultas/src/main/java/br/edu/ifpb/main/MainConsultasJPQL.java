@@ -364,7 +364,7 @@ public class MainConsultasJPQL {
         );
     }
 
-    /* Atualizar o nome dos Dependentes para Maisculo*/
+    /* Atualizar o nome de todos os Dependentes para Maisculo*/
     private static void atualizarNomeTodosDependentes(EntityManager em) {
         String jpql = "UPDATE Dependente d SET d.nome=LOWER(d.nome)";
         em.getTransaction().begin();
