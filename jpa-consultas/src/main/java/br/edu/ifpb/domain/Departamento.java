@@ -21,7 +21,7 @@ public class Departamento implements Serializable{
     
     
     // UM Departamento é gerenciado por UM Gerente
-    @OneToOne //POSSUIDOR
+    @OneToOne//(mappedBy = "dep") //POSSUIDOR
     private Gerente gerente; // 1 -> 1 bidirecional
 
     public Departamento() {

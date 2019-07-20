@@ -17,7 +17,6 @@ import javax.persistence.OneToOne;
  * @mail ricardo.job@ifpb.edu.br
  * @since 16/07/2019, 07:51:52
  */
-
 @Entity
 public class Funcionario implements Serializable {
 
@@ -26,6 +25,7 @@ public class Funcionario implements Serializable {
     private int id;
     private String nome;
     private String cpf;
+    private double salario;
 
     // UM Funcionario possui UM Endereco
     @OneToOne//(cascade = CascadeType.PERSIST)
@@ -47,9 +47,10 @@ public class Funcionario implements Serializable {
     @ManyToOne
     private Departamento departamento; // N -> 1 unidirecional
 
-    public Funcionario(String nome, String cpf, Endereco endereco) {
+    public Funcionario(String nome,String cpf,double salario, Endereco endereco) {
         this();
         this.nome = nome;
+        this.salario = salario;
         this.cpf = cpf;
         this.endereco = endereco;
     }
@@ -131,6 +132,15 @@ public class Funcionario implements Serializable {
         this.departamento = departamento;
     }
 
+    public double getSalario() {
+        return salario;
+    }
+
+    public void setSalario(double salario) {
+        this.salario = salario;
+    }
+
+   
     @Override
     public String toString() {
         return "Funcionario{" + "id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", endereco=" + endereco + ", dependentes=" + dependentes + ", projetos=" + projetos + ", departamento=" + departamento + '}';

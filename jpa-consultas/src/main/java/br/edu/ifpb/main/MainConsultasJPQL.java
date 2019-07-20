@@ -6,6 +6,7 @@ import br.edu.ifpb.domain.Dependentes;
 import br.edu.ifpb.domain.Funcionario;
 import br.edu.ifpb.domain.Gerencia;
 import br.edu.ifpb.domain.Gerente;
+import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -34,7 +35,7 @@ public class MainConsultasJPQL {
 //        consultarNomeDoDepartamentoEGerenteComTipo(em);
 //        consultarNomeDoFuncionarioQuePossuiDependentes(em);
 //        consultarNomeDoFuncionarioNomeDoDependente(em);
-        consultarNomeDoFuncionarioQuantidadeDeDependentes(em);
+//        consultarNomeDoFuncionarioQuantidadeDeDependentes(em);
 //        consultarDependentesComIdEntre(em);
 //        consultarDependentesComIdFora(em);
 //        consultarDependentesComIdEntreBETWEEN(em);
@@ -46,10 +47,10 @@ public class MainConsultasJPQL {
 //        consultarPrimeiraLetraNomesDosDependente(em);
 //        consultarNumeroDeTodosOsDependentes(em);
 //        consultarNomeDoFuncionarioEQuantidadeDependentes(em);
-//        consultarDependenteComIdSuperiorAMedia(em);
+//        consultarFuncionarComSalarioSuperiorAMedia(em);
 //        consultarDependenteSeTodosIdSuperiorADez(em);
 //        consultarDependenteSeQualquerIdSuperiorADez(em);
-//        atualizarNomeTodosDependentes(em);
+        atualizarNomeTodosDependentes(em);
 //        removerDependenteComId(em);
 //        consultarTodosOsDependentesNamedQuery(em);
 //        consultarOsDependentesComIdNamedQuery(em);
@@ -200,77 +201,177 @@ public class MainConsultasJPQL {
 
     /* Selecionar o nome dos Dependentes que possuem id entre 15 e 17*/
     private static void consultarDependentesComIdEntre(EntityManager em) {
+        String jpql = "SELECT d FROM Dependente d WHERE d.codigo >= 15 AND d.codigo <= 17";
+        TypedQuery<Dependente> query = em.createQuery(jpql,Dependente.class);
+        List<Dependente> list = query.getResultList();
+        list.forEach(
+            d -> System.out.println(d.getCodigo() + " - " + d.getNome())
+        );
 
     }
 
     /* Selecionar o nome dos Dependentes que possuem id fora do intervalo de 15 a 17*/
     private static void consultarDependentesComIdFora(EntityManager em) {
-
+        String jpql = "SELECT d FROM Dependente d WHERE d.codigo<15 OR d.codigo>17";
+//        String jpql = "SELECT d FROM Dependente d WHERE NOT( d.codigo>=15 AND d.codigo<=17 )";
+        TypedQuery<Dependente> query = em.createQuery(jpql,Dependente.class);
+        query.getResultList()
+            .forEach(
+                d -> System.out.println(d.getCodigo() + " - " + d.getNome())
+            );
     }
 
     /* Selecionar o nome dos Dependentes que possuem id entre 15 e 17, usando a clausa BETWEEN*/
     private static void consultarDependentesComIdEntreBETWEEN(EntityManager em) {
-
+        String jpql = "SELECT d FROM Dependente d WHERE d.codigo BETWEEN 15 AND 17";
+        TypedQuery<Dependente> query = em.createQuery(jpql,Dependente.class);
+        query.getResultList()
+            .forEach(
+                d -> System.out.println(d.getCodigo())
+            );
     }
 
     /* Selecionar o nome dos Dependentes que possuem id fora do intervalo de 15 a 17, usando BETWEEN*/
     private static void consultarDependentesComIdForaBETWEEN(EntityManager em) {
-
+        String jpql = "SELECT d FROM Dependente d WHERE d.codigo NOT BETWEEN 15 AND 17";
+        TypedQuery<Dependente> query = em.createQuery(jpql,Dependente.class);
+        query.getResultList()
+            .forEach(
+                d -> System.out.println(d.getCodigo())
+            );
     }
 
     /* Selecionar os Departamentos que não possuem Gerente */
     private static void consultarDepartamentoSemGerente(EntityManager em) {
+        String jpql = "SELECT d FROM Departamento d WHERE d.gerente IS NULL";
+        TypedQuery<Departamento> query = em.createQuery(jpql,Departamento.class);
+        query.getResultList()
+            .forEach(
+                d -> System.out.println(d.getAbreviacao())
+            );
 
+        // Selecionar os Gerentes que não gerenciam Departamentos
+//        String jpql = "SELECT g FROM Gerente g LEFT JOIN g.dep d WHERE d.gerente IS NULL";
+//        TypedQuery<Gerente> query = em.createQuery(jpql,Gerente.class);
+//        query.getResultList()
+//            .forEach(
+//                d -> System.out.println(d.getNome())
+//            );
     }
 
     /* Selecionar os Departamentos que possuem Gerente */
     private static void consultarDepartamentoComGerente(EntityManager em) {
+        String jpql = "SELECT d FROM Departamento d WHERE d.gerente IS NOT NULL";
+        TypedQuery<Departamento> createQuery = em.createQuery(jpql,Departamento.class);
+        createQuery.getResultList()
+            .forEach(
+                d -> System.out.println(d.getAbreviacao())
+            );
 
     }
 
     /* Selecionar o nome dos Funcionarios que possuem Dependentes */
     private static void consultarFuncionarioPossuiDependente(EntityManager em) {
-
+        String jpql = "SELECT f FROM Funcionario f WHERE f.dependentes IS NOT EMPTY";
+        TypedQuery<Funcionario> createQuery = em.createQuery(jpql,Funcionario.class);
+        createQuery.getResultList()
+            .forEach(
+                f -> System.out.println(f.getNome())
+            );
     }
 
-    /* Selecionar o nome dos Funcionarios que possuem Dependentes e o nome do Dependente começa com letra M */
+    /* Selecionar o nome dos Funcionarios que possuem Dependentes e 
+     * o nome do Dependente começa com letra M */
     private static void consultarFuncionarioDependenteIniciandoComLetra(EntityManager em) {
-
+        String letra = "m%";
+        String jpql = "SELECT UPPER(f.nome) FROM Funcionario f, Dependente d "
+            + "WHERE d MEMBER OF f.dependentes AND LOWER(d.nome) LIKE :letra";
+        TypedQuery<String> createQuery = em.createQuery(jpql,String.class);
+        createQuery.setParameter("letra",letra);
+        createQuery.getResultList().forEach(System.out::println);
     }
 
     /* Selecionar a primeira letra do nome dos Dependentes  */
     private static void consultarPrimeiraLetraNomesDosDependente(EntityManager em) {
-
+        String jpql = "SELECT SUBSTRING(d.nome, 1, 1) FROM Dependente d";
+        TypedQuery<String> query = em.createQuery(jpql,String.class);
+        query.getResultList()
+            .forEach(
+                //                nome -> System.out.println(nome.substring(0,1))
+                System.out::println
+            );
     }
 
     /* Selecionar o total de Dependentes  */
     private static void consultarNumeroDeTodosOsDependentes(EntityManager em) {
-
+        String jpql = "SELECT COUNT(d) FROM Dependente d";
+        TypedQuery<Long> createQuery = em.createQuery(jpql,Long.class);
+        Long result = createQuery.getSingleResult();
+        System.out.println("result = " + result);
     }
 
-    /* Selecionar o nomes dos Funcionarios e quantidade de seus Dependentes, se a quantidade for superior ou igual a 2*/
+    /* Selecionar o nomes dos Funcionarios e quantidade de seus Dependentes, 
+     * se a quantidade for superior ou igual a 2*/
     private static void consultarNomeDoFuncionarioEQuantidadeDependentes(EntityManager em) {
-
+//        String jpql = "SELECT f.nome, COUNT(d) FROM Funcionario f JOIN Dependente d "
+//            + "WHERE d MEMBER OF f.dependentes GROUP BY f.nome HAVING COUNT(d) >=2 ";
+        String jpql = "SELECT f.nome, COUNT(d) FROM Funcionario f JOIN f.dependentes d "
+            + "GROUP BY f.nome HAVING COUNT(d) >=2 ";
+        Query createQuery = em.createQuery(jpql);
+        List<Object[]> resultList = createQuery.getResultList();
+        resultList.forEach(
+            d -> System.out.println(
+                Arrays.toString(d)
+            )
+        );
     }
 
-    /* Selecionar o nome do Dependente que possui o código superior a média */
-    private static void consultarDependenteComIdSuperiorAMedia(EntityManager em) {
-
+    /* Selecionar o nome do Funcionario que possui o salário superior a média */
+    private static void consultarFuncionarComSalarioSuperiorAMedia(EntityManager em) {
+        //avg=1825.0
+        String jpql = "SELECT f.nome, f.salario FROM Funcionario f WHERE f.salario < "
+            + "(SELECT AVG(funcionario.salario) FROM Funcionario funcionario)";
+        Query createQuery = em.createQuery(jpql);
+        List<Object[]> resultList = createQuery.getResultList();
+        resultList.forEach(
+            (a) -> System.out.println(
+                Arrays.toString(a)
+            )
+        );
     }
 
     /* Selecionar o nome dos Dependentes SE TODOS os códigos forem superior a dez */
     private static void consultarDependenteSeTodosIdSuperiorADez(EntityManager em) {
-
+//        String jpql = "SELECT d.nome, d.codigo FROM Dependente d WHERE NOT EXISTS "
+//            + "(SELECT d FROM Dependente d WHERE 10 >= d.codigo)";
+        String jpql = "SELECT d.nome, d.codigo FROM Dependente d WHERE 10 < ALL"
+            + "(SELECT d.codigo FROM Dependente d)";
+        Query query = em.createQuery(jpql);
+        List<Object[]> resultList = query.getResultList();
+        resultList.forEach(a -> System.out.println(Arrays.toString(a)));
     }
 
     /* Selecionar o nome dos Dependentes SE ALGUM dos códigos for superior a dez */
     private static void consultarDependenteSeQualquerIdSuperiorADez(EntityManager em) {
-
+        String jpql = "SELECT d.nome, d.codigo FROM Dependente d WHERE 10 < SOME "
+            + "(SELECT dep.codigo FROM Dependente dep)";
+        Query createQuery = em.createQuery(jpql);
+        List<Object[]> resultList = createQuery.getResultList();
+        resultList.forEach(
+            a -> System.out.println(
+                Arrays.toString(a)
+            )
+        );
     }
 
     /* Atualizar o nome dos Dependentes para Maisculo*/
     private static void atualizarNomeTodosDependentes(EntityManager em) {
-
+        String jpql = "UPDATE Dependente d SET d.nome=LOWER(d.nome)";
+        em.getTransaction().begin();
+        int executeUpdate = em.createQuery(jpql).executeUpdate();
+        em.getTransaction().commit();
+        System.out.println("executeUpdate = " + executeUpdate);
+         
     }
 
     /* Remover o Dependente com código igual a 2 */

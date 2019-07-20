@@ -23,58 +23,61 @@ public class IniciadorBancoDeDados {
 
     public void dadosIniciais() {
         Endereco meuEndereco = new Endereco(
-                "Minha rua", "Meu bairro", "Minha cidade"
+            "Minha rua","Meu bairro","Minha cidade"
         );
         Endereco primeiro = new Endereco(
-                "rua", "bairro", "cidade"
+            "rua","bairro","cidade"
         );
         Endereco segundo = new Endereco(
-                "rua 1", "bairro", "cidade"
+            "rua 1","bairro","cidade"
         );
         Funcionario chaves = new Funcionario(
-                "Chaves", "134", primeiro
+            "Chaves","134",2300.0,primeiro
         );
         Funcionario kiko = new Funcionario(
-                "Kiko", "1354", segundo
+            "Kiko","1354",1200.0,segundo
         );
         Funcionario madruga = new Funcionario(
-                "Madruga", "123", meuEndereco
+            "Madruga","123",800.0,meuEndereco
         );
         Funcionario florinda = new Funcionario(
-                "Florinda", "124", meuEndereco
+            "Florinda","124",3000.0,meuEndereco
         );
         Dependente chiquinha = new Dependente(
-                "Chiquinha"
+            "Chiquinha"
         );
         Dependente godiles = new Dependente(
-                "Godiles"
+            "Godiles"
         );
         Dependente mariana = new Dependente(
-                "Mariana"
+            "Mariana"
         );
         Dependente jose = new Dependente(
-                "jose"
+            "jose"
         );
         Dependente tulio = new Dependente(
-                "Tulio"
+            "Tulio"
         );
         Projeto dac = new Projeto(
-                "DAC"
+            "DAC"
         );
         Projeto pwi = new Projeto(
-                "PWI"
+            "PWI"
         );
         Gerente gerente = new Gerente(
-                "Jo", "123"
+            "Jo","123"
+        );
+        Gerente segundoGerente = new Gerente(
+            "Kiko","124"
         );
         Departamento uninfo = new Departamento(
-                "UNINFO"
+            "UNINFO"
         );
         Departamento unind = new Departamento(
-                "UNIND"
+            "UNIND"
         );
         Projeto sd = new Projeto(
-                "SD"
+            "SD"
         );
 
         //bidirecional
@@ -127,6 +130,7 @@ public class IniciadorBancoDeDados {
         em.persist(godiles);
         em.persist(jose);
         em.persist(tulio);
+        em.persist(segundoGerente);
 
 //        for (int i = 0; i < 1_000_000; i++) {
 //            em.persist(
