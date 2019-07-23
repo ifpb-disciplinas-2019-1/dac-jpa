@@ -3,7 +3,11 @@ package br.edu.ifpb.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.ColumnResult;
+import javax.persistence.ConstructorResult;
 import javax.persistence.Entity;
+import javax.persistence.EntityResult;
+import javax.persistence.FieldResult;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -11,12 +15,39 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
 
 /**
  * @author Ricardo Job
  * @mail ricardo.job@ifpb.edu.br
  * @since 16/07/2019, 07:51:52
  */
+@SqlResultSetMappings(
+    value = {
+        @SqlResultSetMapping(
+            name = "FuncioarioMapping",
+            entities = @EntityResult(
+                entityClass = Funcionario.class,
+                fields = {
+                    @FieldResult(name = "id", column = "id"),
+                    @FieldResult(name = "nome", column = "nome")
+                }
+
+            )
+        ),
+        @SqlResultSetMapping(
+            name = "FuncionarioNativoMapping",
+            classes = @ConstructorResult(
+                targetClass = FuncionarioNativo.class,
+                columns = {
+                    @ColumnResult(name = "id"),
+                    @ColumnResult(name = "nome")
+                }
+            )
+        )
+    }
+)
 @Entity
 public class Funcionario implements Serializable {
 
@@ -47,7 +78,7 @@ public class Funcionario implements Serializable {
     @ManyToOne
     private Departamento departamento; // N -> 1 unidirecional
 
-    public Funcionario(String nome,String cpf,double salario, Endereco endereco) {
+    public Funcionario(String nome,String cpf,double salario,Endereco endereco) {
         this();
         this.nome = nome;
         this.salario = salario;
@@ -140,7 +171,6 @@ public class Funcionario implements Serializable {
         this.salario = salario;
     }
 
-   
     @Override
     public String toString() {
         return "Funcionario{" + "id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", endereco=" + endereco + ", dependentes=" + dependentes + ", projetos=" + projetos + ", departamento=" + departamento + '}';

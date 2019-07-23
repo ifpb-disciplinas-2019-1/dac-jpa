@@ -5,13 +5,20 @@ import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * @author Ricardo Job
  * @mail ricardo.job@ifpb.edu.br
  * @since 17/07/2019, 07:59:48
  */
- 
+@NamedQueries(
+    {
+     @NamedQuery(name = "Dependente.todos",query = "SELECT d FROM Dependente d"), 
+     @NamedQuery(name = "Dependente.idSuperior",query = "SELECT d FROM Dependente d WHERE d.codigo > :id")
+    }
+)
 @Entity
 public class Dependente implements Serializable {
 
@@ -66,7 +73,7 @@ public class Dependente implements Serializable {
         if (this.codigo != other.codigo) {
             return false;
         }
-        if (!Objects.equals(this.nome, other.nome)) {
+        if (!Objects.equals(this.nome,other.nome)) {
             return false;
         }
         return true;
@@ -76,6 +83,5 @@ public class Dependente implements Serializable {
     public String toString() {
         return "Dependente{" + "codigo=" + codigo + ", nome=" + nome + '}';
     }
-    
 
 }

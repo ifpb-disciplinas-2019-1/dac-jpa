@@ -4,11 +4,12 @@ import br.edu.ifpb.domain.Departamento;
 import br.edu.ifpb.domain.Dependente;
 import br.edu.ifpb.domain.Dependentes;
 import br.edu.ifpb.domain.Funcionario;
+import br.edu.ifpb.domain.FuncionarioNativo;
 import br.edu.ifpb.domain.Gerencia;
-import br.edu.ifpb.domain.Gerente;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -24,7 +25,7 @@ public class MainConsultasJPQL {
         EntityManager em = Persistence
             .createEntityManagerFactory("ExemploPU")
             .createEntityManager();
-        new IniciadorBancoDeDados(em).dadosIniciais();
+//        new IniciadorBancoDeDados(em).dadosIniciais();
 
 //        consultarTodosOsFuncionarios(em);
 //        consultarDepartamentoComId(em);
@@ -50,14 +51,15 @@ public class MainConsultasJPQL {
 //        consultarFuncionarComSalarioSuperiorAMedia(em);
 //        consultarDependenteSeTodosIdSuperiorADez(em);
 //        consultarDependenteSeQualquerIdSuperiorADez(em);
-        atualizarNomeTodosDependentes(em);
+//        atualizarNomeTodosDependentes(em);
 //        removerDependenteComId(em);
 //        consultarTodosOsDependentesNamedQuery(em);
 //        consultarOsDependentesComIdNamedQuery(em);
 //        consultarTodosOsFuncionariosNativeQuery(em);
+//        consultarTodosOsDependentesDoFuncionarioComIdOito(em);
 //        consultarNomeIdFuncionariosNativeQuery(em);
 //        consultarNomeIdEmpregadosNativeQueryComTipo(em);
-//        consultarNomeIdFuncionarioNativeQueryComTipoEntidade(em);
+        consultarNomeIdFuncionarioNativeQueryComTipoEntidade(em);
     }
 
     /* Selecionar todos os Funcionarios */
@@ -376,32 +378,108 @@ public class MainConsultasJPQL {
 
     /* Remover o Dependente com código igual a 2 */
     private static void removerDependenteComId(EntityManager em) {
-
+        String jpql = "DELETE FROM Dependente d WHERE d.codigo=2";
+        Query query = em.createQuery(jpql);
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        int entidadesRemovidas = query.executeUpdate();
+        transaction.commit();
+//        em.flush();
+        System.out.println("Entidades Removidas: " + entidadesRemovidas);
     }
 
     /* Selecionar todos os Dependentes  */
     private static void consultarTodosOsDependentesNamedQuery(EntityManager em) {
+        String jpql = "Dependente.todos";
+        TypedQuery<Dependente> query = em.createNamedQuery(jpql,Dependente.class);
+        query.getResultList()
+            .forEach(
+                d -> System.out.println(
+                    d.getNome()
+                )
+            );
 
     }
 
     /* Selecionar todos os Dependentes com id superior a 5 */
     private static void consultarOsDependentesComIdNamedQuery(EntityManager em) {
-
+        String jpql = "Dependente.idSuperior";
+        TypedQuery<Dependente> query = em.createNamedQuery(jpql,Dependente.class);
+        query.setParameter("id",16);
+        query.getResultList()
+            .forEach(
+                d -> System.out.println(
+                    d.getCodigo()
+                    + " - "
+                    + d.getNome()
+                )
+            );
     }
 
     private static void consultarTodosOsFuncionariosNativeQuery(EntityManager em) {
+        String sql = "SELECT * FROM Funcionario";
+        Query query = em.createNativeQuery(sql,Funcionario.class);
+        List<Funcionario> lista = query.getResultList();
+        lista.forEach(
+            f -> System.out.println(
+                f.getId()
+                + " "
+                + f.getDependentes().size() // N+1
+                + " "
+                + f.getNome()
+            )
+        );
+    }
 
+    private static void consultarTodosOsDependentesDoFuncionarioComIdOito(EntityManager em) {
+//        String jpql = "SELECT d FROM Funcionario f, IN(f.dependentes) d WHERE f.id=8";
+        String sql = "SELECT * FROM Dependente WHERE funcionario_id=8";
+        em.clear();
+        Query query = em.createNativeQuery(sql,Dependente.class);
+        List<Dependente> lista = query.getResultList();
+        lista.forEach(
+            f -> System.out.println(
+                f.getCodigo()
+                + " "
+                + f.getNome()
+            )
+        );
     }
 
     private static void consultarNomeIdFuncionariosNativeQuery(EntityManager em) {
-
+        String sql = "SELECT * FROM \"funcionarionome\" "; //Usando view
+        Query query = em.createNativeQuery(sql);
+        List<Object[]> lista = query.getResultList();
+        lista.forEach((objects) -> {
+            System.out.println(
+                Arrays.toString(objects)
+            );
+        });
     }
 
     private static void consultarNomeIdEmpregadosNativeQueryComTipo(EntityManager em) {
+        String sql = "SELECT nome, id FROM Funcionario";
+        Query query = em.createNativeQuery(sql,"FuncionarioNativoMapping");
+        List<FuncionarioNativo> resultList = query.getResultList();
+        resultList.forEach(System.out::println);
 
     }
 
     private static void consultarNomeIdFuncionarioNativeQueryComTipoEntidade(EntityManager em) {
+        String sql = "SELECT nome, id FROM funcionario";
+        Query query = em.createNativeQuery(sql,"FuncioarioMapping");
+        List<Funcionario> resultList = query.getResultList();
+
+        resultList.forEach(
+            f -> System.out.println(
+                f.getId()
+                + " "
+                + f.getNome()
+                + " "
+                + f.getCpf()
+            )
+//            f-> System.out.println(Arrays.toString(f))
+        );
 
     }
 }
