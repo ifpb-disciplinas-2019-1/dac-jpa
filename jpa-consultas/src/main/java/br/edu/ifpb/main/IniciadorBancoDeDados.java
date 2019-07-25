@@ -44,19 +44,19 @@ public class IniciadorBancoDeDados {
             "Florinda","124",3000.0,meuEndereco
         );
         Dependente chiquinha = new Dependente(
-            "Chiquinha"
+            "Chiquinha", 18
         );
         Dependente godiles = new Dependente(
-            "Godiles"
+            "Godiles", 22
         );
         Dependente mariana = new Dependente(
-            "Mariana"
+            "Mariana", 21
         );
         Dependente jose = new Dependente(
-            "jose"
+            "jose", 12
         );
         Dependente tulio = new Dependente(
-            "Tulio"
+            "Tulio", 10
         );
         Projeto dac = new Projeto(
             "DAC"

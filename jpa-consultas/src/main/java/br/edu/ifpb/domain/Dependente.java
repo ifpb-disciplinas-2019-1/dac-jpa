@@ -26,13 +26,16 @@ public class Dependente implements Serializable {
     @GeneratedValue
     private int codigo;
     private String nome;
+    private int idade;
 
     public Dependente() {
     }
 
-    public Dependente(String nome) {
+    public Dependente(String nome,int idade) {
         this.nome = nome;
+        this.idade = idade;
     }
+    
 
     public int getCodigo() {
         return codigo;
@@ -79,9 +82,19 @@ public class Dependente implements Serializable {
         return true;
     }
 
+    public int getIdade() {
+        return idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
     @Override
     public String toString() {
-        return "Dependente{" + "codigo=" + codigo + ", nome=" + nome + '}';
+        return "Dependente{" + "codigo=" + codigo + ", nome=" + nome + ", idade=" + idade + '}';
     }
+    
+
 
 }
