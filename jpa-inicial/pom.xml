@@ -10,7 +10,7 @@
 
     <modules>
         <module>jpa-jse</module>
-        <module>jpa-web</module>
+        <module>jpa-web-exemplo</module>
     </modules>
    <parent>
         <groupId>br.edu.ifpb</groupId>
