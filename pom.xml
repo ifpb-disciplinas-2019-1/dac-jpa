@@ -13,6 +13,7 @@
         <module>jpa-atributo</module>
         <module>jpa-mapeamento</module>
         <module>jpa-consultas</module>
+        <module>dac-contexto</module>
     </modules>
     <dependencies> 
         <dependency>

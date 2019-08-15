@@ -6,6 +6,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.transaction.RollbackException;
 
 /**
  * @author Ricardo Job
@@ -21,8 +22,12 @@ public class ControladorDeClientes {
     private Cliente cliente = new Cliente();
 
     public String salvar() {
-        clientes.novo(cliente);
-        cliente = new Cliente();
+        try {
+            clientes.novo(cliente);
+            cliente = new Cliente();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         return null;
     }
 

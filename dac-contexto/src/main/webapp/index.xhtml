@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:inputText value="#{controlador.item.descricao}" />
+            <h:commandButton value="+" action="#{controlador.novo()}" />
+            <h:commandButton value=">" action="#{controlador.finalizar()}" />
+            <h:commandButton value="x" action="#{controlador.cancelar()}" />
+        </h:form>
+
+        <h:dataTable value="#{controlador.todosOsProdutos()}" var="produto">
+            <h:column>#{produto.descricao}</h:column>
+            <h:column>#{produto.codigo}</h:column>
+        </h:dataTable>
+        <h:dataTable value="#{controlador.todasAsVendas()}" var="venda">
+            <h:column>#{venda.id}</h:column>
+            <h:column>#{venda.criadaEm}</h:column>
+        </h:dataTable>
+    </h:body>
+</html>
+

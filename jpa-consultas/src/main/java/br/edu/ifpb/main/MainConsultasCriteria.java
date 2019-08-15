@@ -1,7 +1,6 @@
 package br.edu.ifpb.main;
 
 import br.edu.ifpb.domain.Departamento;
-import br.edu.ifpb.domain.Departamento_;
 import br.edu.ifpb.domain.Dependente;
 import br.edu.ifpb.domain.Dependente_;
 import br.edu.ifpb.domain.Funcionario;
